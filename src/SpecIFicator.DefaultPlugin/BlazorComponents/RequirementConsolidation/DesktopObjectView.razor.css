@@ -1,0 +1,12 @@
+﻿.dragobject {
+    display: inline-block;
+    width: 250px;
+    background-color: white;
+    color: black;
+   
+}
+.deletebutton {
+    position:absolute;
+    top: -34px;
+    right: -34px;
+}

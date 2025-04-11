@@ -1,3 +1,96 @@
-﻿<h3>ConsolidationView</h3>
+﻿@using MDD4All.UI.BlazorComponents.Dialog
+@using SpecIFicator.DefaultPlugin.BlazorComponents;
+@using SpecIFicator.DefaultPlugin.ViewModels;
+@using SpecIFicator.DefaultPlugin.BlazorComponents.Document;
 
 
+<div class="page"
+     draggable="true"
+     style="touch-action:none">
+     
+
+    <div class="buttonbarleft">
+        <button class="btn btn-success"
+            @onclick="() => DataContext.OpenLeftDocumentCommand.Execute(null)">
+            Open Documents
+        </button>
+    </div>
+
+
+
+    <div class="leftsidelist">
+        @if (DataContext.HierarchyViewModelLeft != null)
+        {
+            <CascadingValue Value="@DataContext.HierarchyViewModelLeft">
+                <DocumentConsolidationView ConsolidationViewModel="DataContext" />
+            </CascadingValue>
+        }
+    </div>
+    <div class="desktop">
+
+        
+
+            @foreach (DesktopObjectViewModel desktopObjectViewModel in DataContext.DesktopObjectViewModels)
+            {
+
+                <DesktopObjectView DataContext="desktopObjectViewModel" />
+
+            }
+
+        
+
+    </div>
+
+
+    <div class="buttonbarright">
+        <button class="btn btn-success"
+                @onclick="() => DataContext.OpenRightDocumentCommand.Execute(null)">
+                Open Consolidation
+        </button>
+
+    </div>
+
+
+    <div class="rightsidelist" @ref="DataContext.ConsolidationDocumentReference">
+
+        @if (DataContext.HierachyViewModelRight != null)
+        {
+            <CascadingValue Value="@DataContext.HierachyViewModelRight">
+                <DocumentConsolidationView ConsolidationViewModel="DataContext"/>
+            </CascadingValue>
+        }
+
+    </div>
+
+
+ 
+
+</div>
+
+
+
+
+
+@if(DataContext.ShowOpenLeftHierarchyDialog)
+{
+    <ModalDialog OnClose="@OnOpenLeftDocumentDialogClose"
+             DialogType="ModalDialog.ModalDialogType.OkCancel"
+             Title="Öffnen">
+        
+        
+        <SimpleHierarchySelectorView DataContext="DataContext" />
+    
+    
+    </ModalDialog>
+}
+
+@if(DataContext.ShowOpenRightHierarchyDialog)
+{
+    <ModalDialog OnClose="@OnOpenRightDocumentDialogClose"
+        DialogType="ModalDialog.ModalDialogType.OkCancel"
+        Title="Öffnen">
+    
+    
+     <SimpleHierarchySelectorView DataContext="DataContext" />
+    </ModalDialog>
+}

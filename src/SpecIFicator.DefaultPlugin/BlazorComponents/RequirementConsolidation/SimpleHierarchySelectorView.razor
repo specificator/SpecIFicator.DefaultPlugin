@@ -1,0 +1,37 @@
+﻿
+
+<div>
+
+    <table style="width:100%">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Project</th>
+                <th>Title</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach(ProjectViewModel project in _projectsViewModel.Projects)
+            {
+
+                foreach(NodeViewModel rootNode in project.Hierarchies)
+                {
+
+                    
+                    <tr>
+                        <td><input type="radio" name="nodeIdGroup" @onclick="() => OnRadioButtonClicked(rootNode.NodeID)" /> </td>
+                        <td>@project.ProjectTitle</td>
+                        <td>@rootNode.GetTitle()</td>
+                    </tr>
+                    
+                   
+                }
+
+            
+            }
+        </tbody>
+
+    </table>
+
+</div>

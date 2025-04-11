@@ -1,0 +1,18 @@
+﻿@if (DataContext.LinearResourceList != null)
+{
+    
+    <div id="backgroundPanel">
+        <div id="documentPanel">
+            @foreach (NodeViewModel item in DataContext.LinearResourceList)
+            {
+                <DocumentConsolidationItemContainer ConsolidationViewModel="ConsolidationViewModel" DataContext="@item" OnLoadingFinished="OnLoadingFinished"/>
+                
+            }
+
+        </div>
+
+
+    </div>
+}
+
+

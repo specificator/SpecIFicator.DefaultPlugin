@@ -1,0 +1,18 @@
+﻿.documentItem {
+    width: 100%;
+    position: relative;
+}
+
+.selected {
+    background-color: gold;
+}
+
+.unselected {
+    background-color: transparent;
+}
+
+.commentIcon {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+}

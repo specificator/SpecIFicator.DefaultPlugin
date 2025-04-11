@@ -1,0 +1,51 @@
+﻿@using SpecIFicator.DefaultPlugin.ViewModelExtensions
+@using SpecIFicator.Framework.Configuration
+<div @ref=ElementReference>
+@if (DataContext.IsLoading)
+{
+    <div>
+        @DataContext.Level
+    <span class="placeholder-glow">
+      <span class="placeholder col-7"></span>
+    </span>
+    </div>
+}
+else
+{
+    Type itemType = DynamicConfigurationManager.GetComponentType("DocumentItem",
+                        GetType().FullName,
+                        DataContext.RootResourceClassKey);
+
+    if (itemType != null)
+    {
+        <div @onclick="@(() => OnSelectResource(DataContext))"
+             class="@(DataContext.IsSelected ? ResourceSelectedStyle : ResourceUnselectedStyle) documentItem"
+         draggable="true"
+         @ondragend="OnDragEnd"
+         @ondragstart="OnDragStart"
+         @ontouchstart="OnTouchStart"
+         @ontouchmove="OnTouchMove"
+         >
+             	
+              
+            <CascadingValue Value="@DataContext">
+                <DynamicComponent Type="@itemType"></DynamicComponent>
+            </CascadingValue>
+            @if(DataContext.ReferencedResource.HasComments(DataContext.MetadataReader))
+            {
+                <div class="commentIcon">
+                    <button class="btn btn-outline-info btn-sm"
+                            style="border-color:transparent"
+                            @onclick="OnCommentButtonClick"><i class="bi bi-chat-left-text"></i></button>
+                </div>
+            }
+            </div>
+    }
+    else
+    {
+        <strong>Item type not found.</strong>
+    }
+
+}
+</div>
+

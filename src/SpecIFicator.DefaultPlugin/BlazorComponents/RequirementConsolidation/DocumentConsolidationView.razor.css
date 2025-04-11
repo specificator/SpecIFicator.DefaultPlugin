@@ -1,0 +1,14 @@
+﻿#backgroundPanel {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+#documentPanel {
+    flex: 1 1 auto;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    
+}
