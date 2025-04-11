@@ -1,6 +1,7 @@
 ﻿@using MDD4All.UI.BlazorComponents.Ribbon
 @using MDD4All.UI.BlazorComponents.Tooltip
 @using MDD4All.UI.BlazorComponents.Dialog
+@using SpecIFicator.Framework.Configuration
 <div class="toolbarPanel">
     <RibbonCategory>
         <RibbonPanel PanelTitle="@L["Label.NewResource"]">
@@ -98,14 +99,12 @@
 </div>
 @if (DataContext.EditorActive)
 {
-    <ModalDialog Title="@L[DataContext.EditDialogTitleKey]"
-             DialogType="ModalDialog.ModalDialogType.OkCancel"
-             OnClose="@OnEditDialogClose">
-        <ResourcePanel ResourceViewModel="@DataContext.ResourceUnderEdit"
-                       IsMultilinguismEnabled="@DataContext.IsMultilanguageEnabled"
-                       PrimaryLanguage="@DataContext.PrimaryLanguage"
-                       SecondaryLanguage="@DataContext.SecondaryLanguage" />
-    </ModalDialog>
+    Type itemType = DynamicConfigurationManager.GetComponentType("ResourceEditor",
+                                                                 GetType().FullName,
+                                                                 ((NodeViewModel)DataContext.SelectedNode).RootResourceClassKey);
+    <CascadingValue Value="@DataContext">
+        <DynamicComponent Type="itemType"></DynamicComponent>
+    </CascadingValue>
 }
 @if (DataContext.ShowDeleteConfirm)
 {

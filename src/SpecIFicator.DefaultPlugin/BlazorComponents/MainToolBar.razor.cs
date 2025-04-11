@@ -4,6 +4,7 @@ using MDD4All.SpecIF.ViewModels;
 using MDD4All.SpecIF.DataProvider.Contracts;
 using System.Reflection.Metadata;
 using SpecIFicator.DefaultPlugin.ViewModels;
+using SpecIFicator.Framework.Configuration;
 
 namespace SpecIFicator.DefaultPlugin.BlazorComponents
 {
@@ -20,7 +21,7 @@ namespace SpecIFicator.DefaultPlugin.BlazorComponents
 
         protected override void OnInitialized()
         {
-            DataContext.PropertyChanged += OnPropertyChanged;
+            DataContext.PropertyChanged += OnPropertyChanged;           
         }
 
         private void OnPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -83,18 +84,7 @@ namespace SpecIFicator.DefaultPlugin.BlazorComponents
             StateHasChanged();
         }
 
-        private async Task OnEditDialogClose(bool accepted)
-        {
-            if (accepted)
-            {
-                DataContext.ConfirmEditResourceCommand.Execute(null);
-            }
-            else
-            {
-                DataContext.CancelEditResourceCommand.Execute(null);
-            }
-            StateHasChanged();
-        }
+        
 
         private async Task OnDeleteDialogClose(bool accepted)
         {

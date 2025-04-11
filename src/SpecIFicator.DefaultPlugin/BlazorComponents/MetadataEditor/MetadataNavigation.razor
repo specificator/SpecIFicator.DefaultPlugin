@@ -1,4 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Components.Routing
+@using SpecIFicator.Framework.Configuration
+@using SpecIFicator.Framework.Configuration.DataModels
 <div class="top-row ps-3 navbar">
     <div class="container-fluid">
         <div class="navbar-title">@L["Title:SpecIfMetadata"]</div>
@@ -10,26 +12,30 @@
 
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
     <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" Match="NavLinkMatch.All" @onclick="() => UpdateSelectedTypeAsync(typeof(ResourceClassBrowser))">
-                <span class="bi bi-heptagon-fill" aria-hidden="true"></span>&nbsp; @L["Title.ResourceClasses"]
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" @onclick="() => UpdateSelectedTypeAsync(typeof(StatementClassBrowser))">
-                <span class="bi bi-arrow-left-right" aria-hidden="true"></span>&nbsp; @L["Title.StatementClasses"]
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" @onclick="() => UpdateSelectedTypeAsync(typeof(PropertyClassBrowser))">
-                <span class="bi bi-card-text" aria-hidden="true"></span>&nbsp; @L["Title.PropertyClasses"]
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" @onclick="() => UpdateSelectedTypeAsync(typeof(DataTypesBrowser))">
-                <span class="bi bi-code-slash" aria-hidden="true"></span>&nbsp; @L["Title.DataTypes"]
-            </NavLink>
-        </div>
+        @foreach (ComponentDefinition componentDefinition in ComponentDefinitions)
+        {
+            Key classKey = null;
+            IStringLocalizer stringLocalizer = L;
+            Type type = null;
+            string title = componentDefinition.Title;
+
+
+
+            type = DynamicConfigurationManager.GetComponentType(componentDefinition.Title,
+                                                                GetType().FullName,
+                                                                null);
+
+            stringLocalizer = LocalizerFactory.Create(type);
+            title = stringLocalizer[componentDefinition.TitleKey];
+
+
+
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" Match="NavLinkMatch.All" @onclick="() => UpdateSelectedTypeAsync(type)">
+                    <span class="@componentDefinition.Icon" aria-hidden="true"></span>&nbsp; @L[title]
+                </NavLink>
+            </div>
+        }
     </nav>
 </div>
 
