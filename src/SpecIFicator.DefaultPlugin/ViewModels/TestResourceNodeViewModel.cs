@@ -175,6 +175,8 @@ namespace SpecIFicator.DefaultPlugin.ViewModels
             }
         }
 
+        public string DragDropOperationInformation => throw new NotImplementedException();
+
         public void CheckCurrentNodeAndAllChildNodes(TestResourceNodeViewModel node, bool isChecked)
         {
             node.IsChecked = isChecked;

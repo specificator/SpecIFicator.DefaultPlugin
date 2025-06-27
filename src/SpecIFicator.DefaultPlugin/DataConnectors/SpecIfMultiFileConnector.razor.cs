@@ -7,6 +7,7 @@ using SpecIFicator.DefaultPlugin.Configurations;
 using MDD4All.Configuration;
 using Microsoft.Extensions.Localization;
 using MDD4All.SpecIF.ViewModels;
+using MDD4All.SpecIF.DataModels;
 
 namespace SpecIFicator.DefaultPlugin.DataConnectors
 {
@@ -81,10 +82,10 @@ namespace SpecIFicator.DefaultPlugin.DataConnectors
                     configurationReaderWriter.StoreConfiguration(configuration);
                 }
 
-                ISpecIfMetadataReader metadataReader = new SpecIfFileMetadataReader(MetadataPath);
+                ISpecIfMetadataReader metadataReader = new SpecIfFileMetadataReader<ExtendedSpecIF>(MetadataPath);
                 ISpecIfMetadataWriter metadataWriter = new SpecIfFileMetadataWriter(MetadataPath);
-                ISpecIfDataReader dataReader = new SpecIfFileDataReader(DataPath);
-                ISpecIfDataWriter dataWriter = new SpecIfFileDataWriter(DataPath, metadataReader, dataReader);
+                ISpecIfDataReader dataReader = new SpecIfFileDataReader<ExtendedSpecIF>(DataPath);
+                ISpecIfDataWriter dataWriter = new SpecIfFileDataWriter<ExtendedSpecIF>(DataPath, metadataReader, dataReader);
 
                 DataContext.SpecIfDataProviderFactory.MetadataReader = metadataReader;
                 DataContext.SpecIfDataProviderFactory.MetadataWriter = metadataWriter;
