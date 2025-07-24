@@ -148,6 +148,11 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>MultilanguageSelector.resx</DependentUpon>
       </Compile>
+      <Compile Update="Resources\BlazorComponents\ProjectPanel.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ProjectPanel.resx</DependentUpon>
+      </Compile>
       <Compile Update="Resources\BlazorComponents\ProjectsBrowser.de.Designer.cs">
         <DependentUpon>ProjectsBrowser.de.resx</DependentUpon>
         <DesignTime>True</DesignTime>
@@ -157,6 +162,11 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>ProjectsBrowser.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\BlazorComponents\ProjectViewer.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ProjectViewer.resx</DependentUpon>
       </Compile>
       <Compile Update="Resources\BlazorComponents\RawViewer.de.Designer.cs">
         <DependentUpon>RawViewer.de.resx</DependentUpon>
@@ -352,6 +362,10 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>MultilanguageSelector.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\BlazorComponents\ProjectPanel.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>ProjectPanel.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
       <EmbeddedResource Update="Resources\BlazorComponents\ProjectsBrowser.de.resx">
         <LastGenOutput>ProjectsBrowser.de.Designer.cs</LastGenOutput>
         <Generator>ResXFileCodeGenerator</Generator>
@@ -359,6 +373,10 @@
       <EmbeddedResource Update="Resources\BlazorComponents\ProjectsBrowser.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>ProjectsBrowser.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\BlazorComponents\ProjectViewer.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>ProjectViewer.Designer.cs</LastGenOutput>
       </EmbeddedResource>
       <EmbeddedResource Update="Resources\BlazorComponents\RawViewer.de.resx">
         <LastGenOutput>RawViewer.de.Designer.cs</LastGenOutput>

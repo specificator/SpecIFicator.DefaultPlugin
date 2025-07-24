@@ -79,6 +79,42 @@ namespace SpecIFicator.DefaultPlugin.Resources.BlazorComponents {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die New ähnelt.
+        /// </summary>
+        internal static string Button_NewProject {
+            get {
+                return ResourceManager.GetString("Button.NewProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Project Description ähnelt.
+        /// </summary>
+        internal static string Label_Description {
+            get {
+                return ResourceManager.GetString("Label.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Hierarchy Count ähnelt.
+        /// </summary>
+        internal static string Label_HierarchyCount {
+            get {
+                return ResourceManager.GetString("Label.HierarchyCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Project-ID ähnelt.
+        /// </summary>
+        internal static string Label_ID {
+            get {
+                return ResourceManager.GetString("Label.ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Projects ähnelt.
         /// </summary>
         internal static string Label_Projects {
@@ -88,11 +124,11 @@ namespace SpecIFicator.DefaultPlugin.Resources.BlazorComponents {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Title ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Project Title ähnelt.
         /// </summary>
-        internal static string Label_Title {
+        internal static string Label_ProjectTitle {
             get {
-                return ResourceManager.GetString("Label.Title", resourceCulture);
+                return ResourceManager.GetString("Label.ProjectTitle", resourceCulture);
             }
         }
         
@@ -120,6 +156,15 @@ namespace SpecIFicator.DefaultPlugin.Resources.BlazorComponents {
         internal static string Title_CreateNewHierarchy {
             get {
                 return ResourceManager.GetString("Title.CreateNewHierarchy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die New Project... ähnelt.
+        /// </summary>
+        internal static string Title_CreateNewProject {
+            get {
+                return ResourceManager.GetString("Title.CreateNewProject", resourceCulture);
             }
         }
         

@@ -6,3 +6,13 @@
     width: 75%;
     height: 75%;
 }
+
+a {
+    text-decoration: none;
+    color: darkblue;
+}
+
+a:hover {
+    color: #c00000;
+    background-color: lightgray;
+}

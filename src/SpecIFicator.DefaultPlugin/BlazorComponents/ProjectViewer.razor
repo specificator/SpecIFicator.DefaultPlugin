@@ -1,0 +1,44 @@
+﻿@using MDD4All.SpecIF.ViewModels
+@using MDD4All.UI.BlazorComponents.Dialog
+@using MDD4All.UI.BlazorComponents.Tooltip
+
+<div class="page">
+    <h1>@DataContext.ProjectTitle</h1>
+    <p>ID: @DataContext.ProjectID</p>
+
+    <div class="input-group mb-3">
+        <ResourceClassSelector @bind-SelectedResourceClassKey="SelectedResourceClassKey"></ResourceClassSelector>
+
+        <div class="input-group-append">
+            <button class="btn btn-success" @onclick="() => OnNewHierarchyButtonClicked()">@L["Button.NewHierarchy"]</button>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th scope="col">@L["Label.Title"]</th>
+                <th scope="col">@L["Label.Type"]</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (NodeViewModel nodeViewModel in DataContext.Hierarchies)
+            {
+                <HierarchySelectionRow DataContext="@nodeViewModel" IsLoading="@nodeViewModel.IsLoading" 
+                IsLoadingChanged="IsLoadingChanged"
+                ProjectViewModel="DataContext"/>
+            }
+        </tbody>
+    </table>
+    @if (ShowNewHierarchyDialog)
+    {
+
+        <ModalDialog OnClose="@OnNewHierarchyDialogClose"
+                     DialogType="ModalDialog.ModalDialogType.OkCancel"
+                     Title="@L["Title.CreateNewHierarchy"]">
+            <ResourcePanel ResourceViewModel="@NewHierarchyViewModel" />
+        </ModalDialog>
+    }
+</div>

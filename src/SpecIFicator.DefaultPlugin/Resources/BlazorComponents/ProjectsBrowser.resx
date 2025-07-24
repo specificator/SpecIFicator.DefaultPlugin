@@ -123,11 +123,23 @@
   <data name="Button.NewHierarchy" xml:space="preserve">
     <value>New Hierarchy</value>
   </data>
+  <data name="Button.NewProject" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="Label.Description" xml:space="preserve">
+    <value>Project Description</value>
+  </data>
+  <data name="Label.HierarchyCount" xml:space="preserve">
+    <value>Hierarchy Count</value>
+  </data>
+  <data name="Label.ID" xml:space="preserve">
+    <value>Project-ID</value>
+  </data>
   <data name="Label.Projects" xml:space="preserve">
     <value>Projects</value>
   </data>
-  <data name="Label.Title" xml:space="preserve">
-    <value>Title</value>
+  <data name="Label.ProjectTitle" xml:space="preserve">
+    <value>Project Title</value>
   </data>
   <data name="Label.Type" xml:space="preserve">
     <value>Type</value>
@@ -137,6 +149,9 @@
   </data>
   <data name="Title.CreateNewHierarchy" xml:space="preserve">
     <value>Create new Hierarchy...</value>
+  </data>
+  <data name="Title.CreateNewProject" xml:space="preserve">
+    <value>New Project...</value>
   </data>
   <data name="Title.ProjectsBrowser" xml:space="preserve">
     <value>Projects</value>

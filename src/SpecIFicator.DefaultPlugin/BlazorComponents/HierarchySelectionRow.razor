@@ -36,7 +36,9 @@ else
                 </a>
             </Tooltip>
 
-            <HierarchyMenu HierarchyKeyString=@DataContext.HierarchyKey.ToString() />
+            <HierarchyMenu HierarchyKeyString=@DataContext.HierarchyKey.ToString() 
+            ProjectViewModel="ProjectViewModel"
+            ShowChanged = "IsLoadingChanged"/>
 
             
             @if(DataContext.ReferencedResource.ResourceClassID == "RC-TestModel")

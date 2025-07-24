@@ -1,18 +1,22 @@
 ﻿<span class="dropdown">
-    <button class="btn btn-outline-secondary btn-sm dropdown-toggle" data-toggle="dropdown" 
-            type="button" aria-haspopup="true" 
-            aria-expanded="false" 
-        @onclick="e => this.show = !this.show" 
-        @onfocusout="OutFocus">
+    <button class="btn btn-outline-secondary btn-sm dropdown-toggle" data-toggle="dropdown"
+            type="button" aria-haspopup="true"
+            aria-expanded="false"
+            @onclick="e => this.show = !this.show"
+            @onfocusout="OutFocus">
         <i class="bi bi-menu-button-fill"></i>
     </button>
-    <div class="dropdown-menu pre-scrollable @(show? "show":"")" >
-        <a class="dropdown-item" 
-           href="/pluginPage/E4C606C2-E744-4022-A715-D44A4DFC85B6/@HierarchyKeyString" 
-           type="button" >
+    <div class="dropdown-menu pre-scrollable @(show ? "show" : "")">
+        <a class="dropdown-item"
+           href="/pluginPage/E4C606C2-E744-4022-A715-D44A4DFC85B6/@HierarchyKeyString"
+           type="button">
             <i class="bi bi-file-earmark-arrow-down"></i> @L["Label.Export"]
         </a>
-
+        <a class="dropdown-item"
+           @onclick="OnDeleteHierarchyButtonClicked"
+           type="button">
+            <i class="bi bi-trash"</i> @L["Label.DeleteHierarchy"]
+        </a>
     </div>
 </span>
 

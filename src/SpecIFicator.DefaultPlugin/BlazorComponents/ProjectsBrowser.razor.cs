@@ -8,111 +8,70 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using MDD4All.SpecIF.DataModels.Manipulation;
 using Microsoft.Extensions.Localization;
+using System.Diagnostics;
 
 namespace SpecIFicator.DefaultPlugin.BlazorComponents
 {
     public partial class ProjectsBrowser
     {
         private ProjectsViewModel _projectsViewModel;
-
         [Inject]
         private IStringLocalizer<ProjectsBrowser> L { get; set; }
-
         [Inject]
         private ISpecIfDataProviderFactory DataProviderFactory { get; set; }
-
         private ISpecIfMetadataReader MetadataReader { get; set; }
-        
         private ISpecIfDataReader DataReader { get; set; }
-
         private ISpecIfDataWriter DataWriter { get; set; }
-
-        private bool ShowNewHierarchyDialog { get; set; }
-
-        private ResourceViewModel NewHierarchyViewModel { get; set; }
-
-        private Key SelectedResourceClassKey { get; set; }
-
-        private List<ResourceClass> AvailableResourceClasses
-        {
-            get
-            {
-                List<ResourceClass> result = new List<ResourceClass>();
-
-                result = MetadataReader.GetAllResourceClasses();
-
-                return result;
-            }
-        }
-
+        private bool ShowNewProjectDialog { get; set; } = false;
+        private bool IsInEditMode { get; set; } = false;
+        private string _selectedProjectID = string.Empty;
+        private string currentTitle = string.Empty;
+        private string currentDescription = string.Empty;
         protected override void OnInitialized()
         {
             MetadataReader = DataProviderFactory.MetadataReader;
             DataReader = DataProviderFactory.DataReader;
             DataWriter = DataProviderFactory.DataWriter;
-
-            if (AvailableResourceClasses != null && AvailableResourceClasses.Any())
-            {
-                ResourceClass firstResourceClass = AvailableResourceClasses[0];
-
-                SelectedResourceClassKey = new Key(firstResourceClass.ID, firstResourceClass.Revision);
-            }
-
             _projectsViewModel = new ProjectsViewModel(MetadataReader, DataWriter, DataReader);
         }
 
-        private void OnNewHierarchyButtonClicked()
+        private void OnEditButtonClicked(ProjectViewModel viewModelToEdit)
         {
-            Resource hierarchyResource = SpecIfDataFactory.CreateResource(SelectedResourceClassKey, MetadataReader);
-
-            NewHierarchyViewModel = new ResourceViewModel(MetadataReader, DataReader, DataWriter, hierarchyResource);
-            NewHierarchyViewModel.IsInEditMode = true;
-
-            ShowNewHierarchyDialog = true;
-            StateHasChanged();
-
-            
+            _selectedProjectID = viewModelToEdit.ProjectID;
+            ShowNewProjectDialog = true;
+            IsInEditMode = true;
+            currentTitle = viewModelToEdit.ProjectTitle;
+            currentDescription = viewModelToEdit.ProjectDescription;
         }
-
-
-        private async Task OnNewHierarchyDialogClose(bool accepted)
+        private void OnNewProjectButtonClicked()
         {
-            if (accepted)
-            {
-                _projectsViewModel.CreateNewHierarchyCommand.Execute(NewHierarchyViewModel.Resource);
-            }
-
-
-
-            ShowNewHierarchyDialog = false;
-            StateHasChanged();
-
-            //string json = JsonConvert.SerializeObject(NewHierarchyViewModel.Resource, Formatting.Indented);
-
-            //Console.WriteLine(json);
-
-            
+            ShowNewProjectDialog = true;
         }
-
-        private async Task OnHierarchySelectionChange(ChangeEventArgs args)
+        private void OnNewProjectDialogClose(bool accepted)
         {
-            Console.WriteLine(args.Value.ToString());
-            string selection = args.Value.ToString();
-            if (!string.IsNullOrEmpty(selection))
+            if (IsInEditMode)
             {
-                SelectedResourceClassKey = new Key();
-                SelectedResourceClassKey.InitailizeFromKeyString(selection);
+                if (accepted)
+                {
+                    List<string> parameterList = new List<string> { currentTitle, currentDescription, _selectedProjectID };
+                    _projectsViewModel.EditProjectCommand.Execute(parameterList);
+                    _selectedProjectID = string.Empty;
+                }
+                ShowNewProjectDialog = false;
+                IsInEditMode = false;
+                StateHasChanged();
             }
-        }
-
-        private void IsLoadingChanged(bool value)
-        {
-            if (value == false)
+            else
             {
-                InvokeAsync(() => StateHasChanged());
+                if (accepted)
+                {
+                    List<string> parameterList = new List<string> { currentTitle, currentDescription };
+                    _projectsViewModel.AddNewProjectCommand.Execute(parameterList);
+                }
+                ShowNewProjectDialog = false;
             }
+            currentTitle = string.Empty;
+            currentDescription = string.Empty;
         }
     }
-
-    
 }

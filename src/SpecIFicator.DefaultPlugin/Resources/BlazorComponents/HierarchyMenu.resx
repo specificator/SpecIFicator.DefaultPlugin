@@ -120,4 +120,7 @@
   <data name="Label.Export" xml:space="preserve">
     <value>Export to file...</value>
   </data>
+  <data name="Label.DeleteHierarchy" xml:space="preserve">
+    <value> Delete hierarchy</value>
+  </data>
 </root>

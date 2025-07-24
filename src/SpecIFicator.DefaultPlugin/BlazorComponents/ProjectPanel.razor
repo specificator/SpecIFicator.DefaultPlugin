@@ -1,0 +1,26 @@
+﻿@using MDD4All.SpecIF.DataModels.Manipulation
+@using MDD4All.SpecIF.ViewModels
+<fieldset>
+    <label for="ProjectTitle">@L["Label.ProjectTitle"]:</label>
+    <input type="text" id="ProjectTitle" @bind="@ProjectTitle" @bind:event="oninput">
+    <br />
+    @if (TitleIsInvalid)
+    {
+        @if (@ProjectTitle == null || @ProjectTitle.Trim().Length == 0)
+        {
+            <span class="text-danger">@L["Message.NoTitle"]</span>
+        }
+        else if (!System.Text.RegularExpressions.Regex.IsMatch(@ProjectTitle, @"^[a-zA-Z\s]+$"))
+        {
+            <span class="text-danger">@L["Message.LettersOnly"]</span>
+        }
+        else
+        {
+            <span class="text-danger">@L["Message.TitleInvalid"]</span>
+        }
+    }
+    <br />
+    <label for="ProjectDescription">@L["Label.Description"]:</label>
+    <BlazingComponents.Summernote.Editor @bind-Content="@ProjectDescription" 
+                                         ShowEditButton="false" />
+</fieldset>

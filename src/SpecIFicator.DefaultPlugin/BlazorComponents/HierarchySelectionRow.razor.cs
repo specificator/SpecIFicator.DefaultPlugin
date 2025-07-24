@@ -25,6 +25,9 @@ namespace SpecIFicator.DefaultPlugin.BlazorComponents
         [Parameter]
         public EventCallback<bool> IsLoadingChanged { get; set; }
 
+        [Parameter]
+        public ProjectViewModel ProjectViewModel { get; set; }
+
         protected override void OnInitialized()
         {
             DataContext.PropertyChanged += DataContextPropertyChanged;

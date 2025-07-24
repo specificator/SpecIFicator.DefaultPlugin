@@ -22,14 +22,14 @@ namespace SpecIFicator.DefaultPlugin.Resources.BlazorComponents {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class HierarchyMenu {
+    internal class ProjectViewer {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal HierarchyMenu() {
+        internal ProjectViewer() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace SpecIFicator.DefaultPlugin.Resources.BlazorComponents {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SpecIFicator.DefaultPlugin.Resources.BlazorComponents.HierarchyMenu", typeof(HierarchyMenu).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SpecIFicator.DefaultPlugin.Resources.BlazorComponents.ProjectViewer", typeof(ProjectViewer).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,38 @@ namespace SpecIFicator.DefaultPlugin.Resources.BlazorComponents {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die  Delete hierarchy ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die New Hierarchy ähnelt.
         /// </summary>
-        internal static string Label_DeleteHierarchy {
+        internal static string Button_NewHierarchy {
             get {
-                return ResourceManager.GetString("Label.DeleteHierarchy", resourceCulture);
+                return ResourceManager.GetString("Button.NewHierarchy", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Export to file... ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Title ähnelt.
         /// </summary>
-        internal static string Label_Export {
+        internal static string Label_Title {
             get {
-                return ResourceManager.GetString("Label.Export", resourceCulture);
+                return ResourceManager.GetString("Label.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Type ähnelt.
+        /// </summary>
+        internal static string Label_Type {
+            get {
+                return ResourceManager.GetString("Label.Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Create New Hierarchy... ähnelt.
+        /// </summary>
+        internal static string Title_CreateNewHierarchy {
+            get {
+                return ResourceManager.GetString("Title.CreateNewHierarchy", resourceCulture);
             }
         }
     }

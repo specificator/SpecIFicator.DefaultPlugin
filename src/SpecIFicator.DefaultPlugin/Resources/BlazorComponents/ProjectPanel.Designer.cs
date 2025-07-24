@@ -22,14 +22,14 @@ namespace SpecIFicator.DefaultPlugin.Resources.BlazorComponents {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class HierarchyMenu {
+    internal class ProjectPanel {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal HierarchyMenu() {
+        internal ProjectPanel() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace SpecIFicator.DefaultPlugin.Resources.BlazorComponents {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SpecIFicator.DefaultPlugin.Resources.BlazorComponents.HierarchyMenu", typeof(HierarchyMenu).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SpecIFicator.DefaultPlugin.Resources.BlazorComponents.ProjectPanel", typeof(ProjectPanel).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,47 @@ namespace SpecIFicator.DefaultPlugin.Resources.BlazorComponents {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die  Delete hierarchy ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Project Description ähnelt.
         /// </summary>
-        internal static string Label_DeleteHierarchy {
+        internal static string Label_Description {
             get {
-                return ResourceManager.GetString("Label.DeleteHierarchy", resourceCulture);
+                return ResourceManager.GetString("Label.Description", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Export to file... ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Project Title ähnelt.
         /// </summary>
-        internal static string Label_Export {
+        internal static string Label_ProjectTitle {
             get {
-                return ResourceManager.GetString("Label.Export", resourceCulture);
+                return ResourceManager.GetString("Label.ProjectTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Project title must only contain letters! ähnelt.
+        /// </summary>
+        internal static string Message_LettersOnly {
+            get {
+                return ResourceManager.GetString("Message.LettersOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Project title is required! ähnelt.
+        /// </summary>
+        internal static string Message_NoTitle {
+            get {
+                return ResourceManager.GetString("Message.NoTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Project title is invalid! ähnelt.
+        /// </summary>
+        internal static string Message_TitleInvalid {
+            get {
+                return ResourceManager.GetString("Message.TitleInvalid", resourceCulture);
             }
         }
     }

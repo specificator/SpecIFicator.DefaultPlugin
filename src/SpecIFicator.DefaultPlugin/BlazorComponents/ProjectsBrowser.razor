@@ -2,56 +2,51 @@
 @using MDD4All.SpecIF.ViewModels
 @using MDD4All.UI.BlazorComponents.Dialog
 @using MDD4All.UI.BlazorComponents.Tooltip
+
 <div class="page">
-    <h1>@L["Label.Projects"]</h1>
-
-    <div class="input-group mb-3">
-        <ResourceClassSelector @bind-SelectedResourceClassKey="SelectedResourceClassKey"></ResourceClassSelector>
-
-        <div class="input-group-append">
-            <button class="btn btn-success" @onclick="() => OnNewHierarchyButtonClicked()">@L["Button.NewHierarchy"]</button>
-        </div>
-    </div>
-
-
-
-    <div>
-
-        @foreach (ProjectViewModel projectViewModel in _projectsViewModel.Projects)
-        {
-
-            <h4>@projectViewModel.ProjectTitle</h4>
-            <p>ID: @projectViewModel.ProjectID</p>
-
-            <table class="table table-striped">
-                <thead>
+    <h1 style="display: inline;">@L["Label.Projects"]</h1>
+    <button class="btn btn-success btn-lg" style="float: right;" @onclick="() => OnNewProjectButtonClicked()">
+        @L["Button.NewProject"]
+    </button>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>@L["Label.ProjectTitle"]</th>
+                <th>@L["Label.ID"]</th>
+                <th>@L["Label.HierarchyCount"]</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ProjectViewModel projectViewModel in _projectsViewModel.Projects)
+            {
+                @if (projectViewModel.ProjectID == "PRJ-DEFAULT" || projectViewModel.ProjectID == "PRJ-METADATA")
+                {
                     <tr>
-                        <th></th>
-                        <th scope="col">@L["Label.Title"]</th>
-                        <th scope="col">@L["Label.Type"]</th>
-                        <th scope="col"></th>
+                        <td><a href="/pluginPage/B0E82D33-BE3C-4EF7-A8D3-6DE60AB4AB17/@projectViewModel.ProjectID.ToString()">@projectViewModel.ProjectTitle</a></td>
+                    <td>@projectViewModel.ProjectID</td>
+                    <td>@projectViewModel.Hierarchies.Count</td>
+                    <td><button class="btn btn-sm btn-primary" disabled @onclick="() => OnEditButtonClicked(projectViewModel)"><i class="bi bi-pencil"></i></button></td>
+                </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td><a href="/pluginPage/B0E82D33-BE3C-4EF7-A8D3-6DE60AB4AB17/@projectViewModel.ProjectID.ToString()">@projectViewModel.ProjectTitle</a></td>
+                        <td>@projectViewModel.ProjectID</td>
+                        <td>@projectViewModel.Hierarchies.Count</td>
+                        <td><button class="btn btn-sm btn-primary" @onclick="() => OnEditButtonClicked(projectViewModel)"><i class="bi bi-pencil"></i></button></td>
                     </tr>
-                </thead>
-                <tbody>
-
-                    @foreach (NodeViewModel nodeViewModel in projectViewModel.Hierarchies)
-                    {
-                        <HierarchySelectionRow DataContext="@nodeViewModel" IsLoading="@nodeViewModel.IsLoading" 
-                                               IsLoadingChanged="IsLoadingChanged" />
-                    }
-                </tbody>
-            </table>
-        }
-    </div>
+                }
+            }
+        </tbody>
+    </table>
 </div>
-
-@if (ShowNewHierarchyDialog)
+@if (ShowNewProjectDialog)
 {
-
-    <ModalDialog OnClose="@OnNewHierarchyDialogClose"
-             DialogType="ModalDialog.ModalDialogType.OkCancel"
-             Title="@L["Title.CreateNewHierarchy"]">
-        <ResourcePanel ResourceViewModel="@NewHierarchyViewModel" />
+    <ModalDialog Title="@L["Title.CreateNewProject"]"
+                 DialogType="ModalDialog.ModalDialogType.OkCancel"
+                 OnClose="@OnNewProjectDialogClose">
+        <ProjectPanel @bind-ProjectTitle="currentTitle" @bind-ProjectDescription="currentDescription"/>
     </ModalDialog>
-
 }

@@ -42,8 +42,6 @@ namespace SpecIFicator.DefaultPlugin.BlazorComponents
             await Task.Delay(TimeSpan.FromSeconds(2));
             CopyButtonIconClass = copyIcon;
             StateHasChanged();
-
-
         }
     }
 }
