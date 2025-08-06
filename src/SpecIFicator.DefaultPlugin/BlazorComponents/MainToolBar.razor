@@ -95,6 +95,16 @@
             </div>
 
         </RibbonPanel>
+        <RibbonPanel PanelTitle="@L["Label.Exit"]">
+            <div class="toolStackPanel">
+                <div>
+                    <a href="/pluginPage/B0E82D33-BE3C-4EF7-A8D3-6DE60AB4AB17/@ProjectID.ToString()" type="button"
+                            class="btn btn-outline-danger btn-lg">
+                        <i class="bi bi-box-arrow-left"></i>
+                    </a>
+                </div>
+            </div>
+        </RibbonPanel>
     </RibbonCategory>
 </div>
 @if (DataContext.EditorActive)
@@ -109,26 +119,26 @@
 @if (DataContext.ShowDeleteConfirm)
 {
     <ModalDialog Title="@L["Title.DeleteResource"]"
-             DialogType="ModalDialog.ModalDialogType.DeleteCancel"
-             OnClose="@OnDeleteDialogClose">
+                 DialogType="ModalDialog.ModalDialogType.DeleteCancel"
+                 OnClose="@OnDeleteDialogClose">
         <div>@L["Text.DeleteResource"]</div>
     </ModalDialog>
 }
-@if(DataContext.ShowAddStatementDialog)
+@if (DataContext.ShowAddStatementDialog)
 {
     <ModalDialog Title="@L["Title.AddStatement"]"
                  DialogType="ModalDialog.ModalDialogType.OkCancel"
                  OnClose="@OnAddStatementDialogClose"
                  CanConfirm="DataContext.CreateStatementViewModel.CanConfirmEditOperation">
-             <StatementCreator DataContext="@DataContext.CreateStatementViewModel"/>
+        <StatementCreator DataContext="@DataContext.CreateStatementViewModel" />
     </ModalDialog>
 }
-@if(DataContext.ShowComments)
+@if (DataContext.ShowComments)
 {
     string dialogTitle = L["Label.Comments"];
     ResourceViewModel resourceViewModel = ((NodeViewModel)DataContext.SelectedNode).ReferencedResource;
     dialogTitle += " - [" + resourceViewModel.Type + "] " + resourceViewModel.Title;
-   
+
     <ModalDialog Title="@dialogTitle"
                  DialogType="ModalDialog.ModalDialogType.Ok"
                  OnClose="@OnCommentDialogClose">

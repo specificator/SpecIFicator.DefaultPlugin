@@ -5,6 +5,7 @@ using MDD4All.SpecIF.DataProvider.Contracts;
 using System.Reflection.Metadata;
 using SpecIFicator.DefaultPlugin.ViewModels;
 using SpecIFicator.Framework.Configuration;
+using MongoDB.Driver;
 
 namespace SpecIFicator.DefaultPlugin.BlazorComponents
 {
@@ -18,10 +19,12 @@ namespace SpecIFicator.DefaultPlugin.BlazorComponents
 
         [Parameter]
         public DefaultPluginHierarchyViewModel DataContext { get; set; }
+        private string ProjectID = "PRJ-DEFAULT";
 
         protected override void OnInitialized()
         {
-            DataContext.PropertyChanged += OnPropertyChanged;           
+            DataContext.PropertyChanged += OnPropertyChanged;
+            ProjectID = DataContext.DataReader.GetProjectIDFromNodeID(DataContext.RootNode.NodeID).ToString();
         }
 
         private void OnPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)

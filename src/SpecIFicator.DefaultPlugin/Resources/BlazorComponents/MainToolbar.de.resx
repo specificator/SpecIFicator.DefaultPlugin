@@ -132,6 +132,9 @@
   <data name="Label.EnableMultilanguage" xml:space="preserve">
     <value>Duale Anzeige</value>
   </data>
+  <data name="Label.Exit" xml:space="preserve">
+    <value>Editor schließen</value>
+  </data>
   <data name="Label.MultilanguageSupport" xml:space="preserve">
     <value>Mehrsprachigkeit</value>
   </data>

@@ -106,6 +106,15 @@ namespace SpecIFicator.DefaultPlugin.Resources.BlazorComponents {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Exit Editor ähnelt.
+        /// </summary>
+        internal static string Label_Exit {
+            get {
+                return ResourceManager.GetString("Label.Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Multilingualism ähnelt.
         /// </summary>
         internal static string Label_MultilanguageSupport {
