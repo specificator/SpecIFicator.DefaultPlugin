@@ -34,6 +34,8 @@ namespace SpecIFicator.DefaultPlugin.BlazorComponents
 
         private NodeViewModel SelectedNode { get; set; }
 
+        private Type _toolbarType;
+
         private Type _treeType;
 
         private Type _hierarchyViewType;
@@ -53,6 +55,11 @@ namespace SpecIFicator.DefaultPlugin.BlazorComponents
                 HierarchyViewModel = new DefaultPluginHierarchyViewModel(DataProviderFactory, key);
 
                 HierarchyViewModel.PropertyChanged += OnStateChanged;
+
+                _toolbarType = DynamicConfigurationManager.GetComponentType("MainToolBar",
+                                                                            GetType().FullName,
+                                                                            HierarchyViewModel
+                                                                            .RootNode.RootResourceClassKey);
 
                 _treeType = DynamicConfigurationManager.GetComponentType("Tree",
                                                                          GetType().FullName,

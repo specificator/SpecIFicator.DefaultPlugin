@@ -2,10 +2,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MDD4All.SpecIF.ViewModels;
 using MDD4All.SpecIF.DataProvider.Contracts;
-using System.Reflection.Metadata;
 using SpecIFicator.DefaultPlugin.ViewModels;
-using SpecIFicator.Framework.Configuration;
-using MongoDB.Driver;
 
 namespace SpecIFicator.DefaultPlugin.BlazorComponents
 {
@@ -17,14 +14,15 @@ namespace SpecIFicator.DefaultPlugin.BlazorComponents
         [Inject]
         private ISpecIfDataProviderFactory DataProviderFactory { get; set; }
 
-        [Parameter]
+        [CascadingParameter]
         public DefaultPluginHierarchyViewModel DataContext { get; set; }
-        private string ProjectID = "PRJ-DEFAULT";
+
+        private string _projectID = "PRJ-DEFAULT";
 
         protected override void OnInitialized()
         {
             DataContext.PropertyChanged += OnPropertyChanged;
-            ProjectID = DataContext.DataReader.GetProjectIDFromNodeID(DataContext.RootNode.NodeID).ToString();
+            _projectID = DataContext.DataReader.GetProjectIDFromNodeID(DataContext.RootNode.NodeID).ToString();
         }
 
         private void OnPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)

@@ -6,8 +6,18 @@
 @if (HierarchyViewModel != null)
 {
     <div class="mainPanel">
-        
-        <MainToolBar DataContext="@HierarchyViewModel"></MainToolBar>
+
+        @if(_toolbarType != null)
+        {
+            <CascadingValue Value="@HierarchyViewModel">
+                <DynamicComponent Type="@_toolbarType"></DynamicComponent>
+            </CascadingValue>
+        }
+        else
+        {
+            <p>No matching main toolbar found!</p>
+        }
+
 
         <div class="editorPanel">
             <SplitZone Style="height:100%;">
