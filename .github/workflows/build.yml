@@ -65,7 +65,7 @@ jobs:
         cp ${{env.DEFAULT_PLUGIN_PUBLISH_DIRECTORY}}MDD4All.BlazingComponents.Summernote.dll ${{env.DEFAULT_PLUGIN_PATH}}
 
     - name: Upload SpecIFicator.DefaultPlugin artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: SpecIFicator.DefaultPlugin_${{env.VERSION}}
         path: output/
