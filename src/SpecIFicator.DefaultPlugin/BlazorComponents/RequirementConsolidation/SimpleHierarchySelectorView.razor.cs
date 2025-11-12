@@ -27,7 +27,7 @@ namespace SpecIFicator.DefaultPlugin.BlazorComponents.RequirementConsolidation
             DataReader = DataProviderFactory.DataReader;
             DataWriter = DataProviderFactory.DataWriter;
 
-            _projectsViewModel = new ProjectsViewModel(MetadataReader, DataWriter, DataReader);
+            _projectsViewModel = new ProjectsViewModel(MetadataReader, DataProviderFactory.MetadataWriter, DataWriter, DataReader);
         }
 
         private void OnRadioButtonClicked(string nodeID)

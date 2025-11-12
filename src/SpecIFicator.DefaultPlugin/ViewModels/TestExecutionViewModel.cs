@@ -394,7 +394,7 @@ namespace SpecIFicator.DefaultPlugin.ViewModels
 
                 Resource newRevisionResource = changedResource.CreateNewRevisionForEdit(HierarchyViewModel.MetadataReader);
 
-                HierarchyViewModel.DataWriter.AddResource(newRevisionResource);
+                HierarchyViewModel.DataWriter.AddResource(newRevisionResource, HierarchyViewModel.ProjectID);
 
                 ResourceViewModel changedResourceViewModel = new ResourceViewModel(HierarchyViewModel.MetadataReader,
                                                               HierarchyViewModel.DataReader,

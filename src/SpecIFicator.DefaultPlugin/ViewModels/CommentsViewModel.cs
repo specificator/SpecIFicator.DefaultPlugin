@@ -158,7 +158,7 @@ namespace SpecIFicator.DefaultPlugin.ViewModels
 
         private void ExecuteSaveComment()
         {
-            _hierarchyViewModel.DataWriter.AddResource(CommentUnderEdit.Resource);
+            _hierarchyViewModel.DataWriter.AddResource(CommentUnderEdit.Resource, _hierarchyViewModel.ProjectID);
 
             Statement statement = SpecIfDataFactory.CreateStatement(new Key("SC-refersTo", "1.1"),
                                                                         CommentUnderEdit.Key,
@@ -167,7 +167,7 @@ namespace SpecIFicator.DefaultPlugin.ViewModels
 
             Task.Run(() =>
             {
-                _hierarchyViewModel.DataWriter.AddStatement(statement);
+                _hierarchyViewModel.DataWriter.AddStatement(statement, _hierarchyViewModel.ProjectID);
 
                 ReferedNode.ReferencedResource.ReinitializeStatementsAsync().Wait();
                 ReferedNode = null;

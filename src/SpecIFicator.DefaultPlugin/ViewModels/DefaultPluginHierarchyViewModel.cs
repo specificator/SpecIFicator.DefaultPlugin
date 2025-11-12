@@ -13,7 +13,8 @@ namespace SpecIFicator.DefaultPlugin.ViewModels
 {
     public class DefaultPluginHierarchyViewModel : HierarchyViewModel
     {
-        public DefaultPluginHierarchyViewModel(ISpecIfDataProviderFactory specIfDataProviderFactory, Key key) : base(specIfDataProviderFactory, key)
+        public DefaultPluginHierarchyViewModel(ISpecIfDataProviderFactory specIfDataProviderFactory, Key key, string projectID) : 
+                                                        base(specIfDataProviderFactory, key, projectID)
         {
             InitalizeCommands();
         }

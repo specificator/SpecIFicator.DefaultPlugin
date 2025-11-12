@@ -11,31 +11,31 @@ namespace SpecIFicator.DefaultPlugin.BlazorComponents.TestExecution
     public partial class TestExecutionPanel
     {
         [Inject]
-        private IStringLocalizer<HierarchyEditor> L { get; set; }
+        private IStringLocalizer<HierarchyEditor> L { get; set; } = null!;
 
         [Inject]
-        private ISpecIfDataProviderFactory DataProviderFactory { get; set; }
+        private ISpecIfDataProviderFactory DataProviderFactory { get; set; } = null!;
 
 
-        private ISpecIfMetadataReader MetadataReader { get; set; }
+        private ISpecIfMetadataReader MetadataReader { get; set; } = null!;
 
 
-        private ISpecIfDataReader DataReader { get; set; }
+        private ISpecIfDataReader DataReader { get; set; } = null!;
 
 
-        private ISpecIfDataWriter DataWriter { get; set; }
+        private ISpecIfDataWriter DataWriter { get; set; } = null!;
 
         // the hierarchy key
         [CascadingParameter]
-        public string DataContext { get; set; }
+        public string? DataContext { get; set; }
 
-        public HierarchyViewModel HierarchyViewModel { get; set; }
+        public HierarchyViewModel HierarchyViewModel { get; set; } = null!;
 
-        private NodeViewModel SelectedNode { get; set; }
+        private NodeViewModel? SelectedNode { get; set; }
 
-        private Type _treeType;
+        private Type? _treeType = null;
 
-        private Type _hierarchyViewType;
+        private Type? _hierarchyViewType = null;
 
 
         protected override void OnInitialized()
@@ -46,20 +46,45 @@ namespace SpecIFicator.DefaultPlugin.BlazorComponents.TestExecution
 
             if (DataContext != null)
             {
-                Key key = new Key();
-                key.InitailizeFromKeyString(DataContext);
+                string hierarchyKeyString = "";
+                string projectID = "PRJ-DEFAULT";
+                if (DataContext != null)
+                {
+                    if (DataContext.Contains("/"))
+                    {
+                        string[] tokens = DataContext.Split("/");
+                        hierarchyKeyString = tokens[0];
+                        projectID = tokens[1];
+                    }
+                    else
+                    {
+                        hierarchyKeyString = DataContext;
+                    }
+                    Key key = new Key();
+                    key.InitailizeFromKeyString(hierarchyKeyString);
 
-                HierarchyViewModel = new HierarchyViewModel(DataProviderFactory, key);
+                    HierarchyViewModel = new HierarchyViewModel(DataProviderFactory, key, projectID);
 
-                HierarchyViewModel.PropertyChanged += OnStateChanged;
+                    HierarchyViewModel.PropertyChanged += OnStateChanged;
+
+                    InitializeTypes();
+                }
+
+            }
+        }
+
+        private void InitializeTypes()
+        {
+            if (HierarchyViewModel.RootNode.RootResourceClassKey != null)
+            {
 
                 _treeType = DynamicConfigurationManager.GetComponentType("TestExecutionTree",
-                                                                         GetType().FullName,
+                                                                         GetType().FullName!,
                                                                          HierarchyViewModel
                                                                             .RootNode.RootResourceClassKey);
 
                 _hierarchyViewType = DynamicConfigurationManager.GetComponentType("TestExecutionView",
-                                                                                  GetType().FullName,
+                                                                                  GetType().FullName!,
                                                                                   HierarchyViewModel.RootNode.RootResourceClassKey);
 
             }
@@ -69,7 +94,15 @@ namespace SpecIFicator.DefaultPlugin.BlazorComponents.TestExecution
         {
             if (e.PropertyName == "StateChanged")
             {
-                StateHasChanged();
+                if(_treeType == null && HierarchyViewModel.RootNode.ReferencedResourceInitialized)
+                {
+                    InitializeTypes();
+                }
+                InvokeAsync(() =>
+                {
+                    StateHasChanged();
+                });
+                
             }
         }
     }

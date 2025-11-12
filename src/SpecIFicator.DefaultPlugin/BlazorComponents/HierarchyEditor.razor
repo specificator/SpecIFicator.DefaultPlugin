@@ -3,7 +3,7 @@
 @using SpecIFicator.DefaultPlugin.BlazorComponents.Document
 @using SplitJs.Blazor.Components
 @using MDD4All.UI.BlazorComponents.Dialog
-@if (HierarchyViewModel != null)
+@if (HierarchyViewModel?.RootNode.RootResourceClassKey != null)
 {
     <div class="mainPanel">
 

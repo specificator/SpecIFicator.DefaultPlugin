@@ -47,6 +47,6 @@
     <ModalDialog Title="@L["Title.CreateNewProject"]"
                  DialogType="ModalDialog.ModalDialogType.OkCancel"
                  OnClose="@OnNewProjectDialogClose">
-        <ProjectPanel @bind-ProjectTitle="currentTitle" @bind-ProjectDescription="currentDescription"/>
+        <ProjectPanel @bind-ProjectTitle="_currentTitle" @bind-ProjectDescription="_currentDescription"/>
     </ModalDialog>
 }

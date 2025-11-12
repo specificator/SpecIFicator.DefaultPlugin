@@ -10,14 +10,15 @@ using GalaSoft.MvvmLight.Command;
 using MDD4All.SpecIF.DataFactory;
 using MDD4All.SpecIF.DataModels.Helpers;
 using MDD4All.SpecIF.ViewModels;
-using System.Runtime.Versioning;
 
 namespace SpecIFicator.DefaultPlugin.ViewModels
 {
     public class TestSuiteSelectionTreeViewModel : ViewModelBase, ITree
     {
 
-        public TestSuiteSelectionTreeViewModel(ISpecIfDataProviderFactory specIfDataProviderFactory, Key key)
+        public TestSuiteSelectionTreeViewModel(ISpecIfDataProviderFactory specIfDataProviderFactory, 
+                                               Key key,
+                                               string projectID)
         {
             _specIfDataProviderFactory = specIfDataProviderFactory;
             _metadataReader = _specIfDataProviderFactory.MetadataReader;
@@ -26,11 +27,13 @@ namespace SpecIFicator.DefaultPlugin.ViewModels
 
             InitializeCommands();
 
-            Node hierarchyRoot = _specIfDataReader.GetHierarchyByKey(key);
+            Node hierarchyRoot = _specIfDataReader.GetHierarchyByKey(key, projectID);
             RootNode = InitializeTestSuiteSelectionTree(hierarchyRoot);
             _treeRootNodes = new ObservableCollection<ITreeNode>();
             _treeRootNodes.Add(RootNode);
             SelectedNode = RootNode;
+            ProjectID = projectID;
+
 
             Key testSuiteKey = new Key("RC-TestSuite", "1.1");
 
@@ -53,6 +56,7 @@ namespace SpecIFicator.DefaultPlugin.ViewModels
 
         public Key TestSuiteHierarchyKey { get; set; }
 
+        public string ProjectID { get; set; }
 
         public ResourceViewModel TestSuiteUnderEdit { get; set; }
 
@@ -87,7 +91,7 @@ namespace SpecIFicator.DefaultPlugin.ViewModels
                                                     }
                                                    );
 
-                _specIfDataWriter.AddResource(testSuiteResource);
+                _specIfDataWriter.AddResource(testSuiteResource, ProjectID);
 
                 // Knoten & Resource speichern
 
@@ -106,7 +110,7 @@ namespace SpecIFicator.DefaultPlugin.ViewModels
                     //testSuiteNode.Nodes.Add(testCaseNode);
                 }
                 // test suite als neue Hierarchy speichern
-                _specIfDataWriter.AddHierarchy(testSuiteNode);
+                _specIfDataWriter.AddHierarchy(testSuiteNode, ProjectID);
 
                 TestSuiteHierarchyKey = new Key(testSuiteNode.ID, testSuiteNode.Revision);
             }
@@ -143,7 +147,7 @@ namespace SpecIFicator.DefaultPlugin.ViewModels
             currentTarget.Nodes.Add(newTargetNode);
 
             // 5. Kopierte Resource speichern. 
-            _specIfDataWriter.AddResource(resourceCopy);
+            _specIfDataWriter.AddResource(resourceCopy, ProjectID);
 
             // 6. Rekursive Aufruf für die Kindknoten
 
@@ -160,13 +164,13 @@ namespace SpecIFicator.DefaultPlugin.ViewModels
                 Node childNode = parent.Nodes[index];
                 if (index == 0)
                 {
-                    _specIfDataWriter.AddNodeAsFirstChild(parent.ID, childNode);
+                    _specIfDataWriter.AddNodeAsFirstChild(parent.ID, childNode, ProjectID);
                 }
                 else
                 {
                     Node predecessorNode = parent.Nodes[index - 1];
 
-                    _specIfDataWriter.AddNodeAsPredecessor(predecessorNode.ID, childNode); //Recursiveanker ?
+                    _specIfDataWriter.AddNodeAsPredecessor(predecessorNode.ID, childNode, ProjectID); //Recursiveanker ?
                 }
                 SaveNewHierarchy(childNode); // Rekursive Methode
             }

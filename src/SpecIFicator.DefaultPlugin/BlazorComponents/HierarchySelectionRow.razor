@@ -1,5 +1,6 @@
 ﻿@using MDD4All.SpecIF.DataModels.Manipulation;
 @using MDD4All.SpecIF.ViewModels;
+@using MDD4All.UI.BlazorComponents.Tooltip
 @using SpecIFicator.DefaultPlugin.ViewModelExtensions;
 @using GalaSoft.MvvmLight;
 @using MDD4All.SpecIF.DataModels;
@@ -30,7 +31,7 @@ else
         <td>[@DataContext.ClassTitle]</td>
         <td>
             <Tooltip Text="@L["Button.EditHierarchy"]">
-                <a href="/pluginPage/3462ACA8-1AB1-442F-971B-975AF96E0017/@DataContext.HierarchyKey.ToString()"
+                <a href="/pluginPage/3462ACA8-1AB1-442F-971B-975AF96E0017/@DataContext.HierarchyKey.ToString()/@DataContext.ProjectID"
                class="btn btn-sm btn-primary">
                     <i class="bi bi-pencil"></i>
                 </a>
@@ -43,13 +44,13 @@ else
             
             @if(DataContext.ReferencedResource.ResourceClassID == "RC-TestModel")
             {
-                <a href="/pluginPage/FB5B66F3-F15B-46A8-BD16-F330A2C3CE7F/@DataContext.HierarchyKey.ToString()" class="btn btn-sm btn-primary">
+                <a href="/pluginPage/FB5B66F3-F15B-46A8-BD16-F330A2C3CE7F/@DataContext.HierarchyKey.ToString()/@DataContext.ProjectID" class="btn btn-sm btn-primary">
                 Neue Testsuite
                 </a>
             }
             @if (DataContext.ReferencedResource.ResourceClassID == "RC-TestSuite")
             {
-                <a href="/pluginPage/36AB7319-01C7-4F3F-9594-A89DBA0BC0A1/@DataContext.HierarchyKey.ToString()" class="btn btn-sm btn-success">
+                <a href="/pluginPage/36AB7319-01C7-4F3F-9594-A89DBA0BC0A1/@DataContext.HierarchyKey.ToString()/@DataContext.ProjectID" class="btn btn-sm btn-success">
                     <i class="bi bi-play"></i>
                 </a>
             }

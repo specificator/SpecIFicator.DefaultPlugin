@@ -17,7 +17,7 @@ namespace SpecIFicator.DefaultPlugin.BlazorComponents.TestExecution
         private ISpecIfDataProviderFactory DataProviderFactory { get; set; }
 
         [CascadingParameter]
-        public string? KeyString { get; set; }
+        public string? KeyAndProjectString { get; set; }
 
         [Inject]
         private NavigationManager NavigationManager { get; set; }
@@ -28,25 +28,43 @@ namespace SpecIFicator.DefaultPlugin.BlazorComponents.TestExecution
 
         protected override void OnInitialized()
         {
-            Key hierarchyRootKey = new Key();
-            hierarchyRootKey.InitailizeFromKeyString(KeyString);
+            string hierarchyKeyString = "";
+            string projectID = "PRJ-DEFAULT";
+            if (KeyAndProjectString != null)
+            {
+                if (KeyAndProjectString.Contains("/"))
+                {
+                    string[] tokens = KeyAndProjectString.Split("/");
+                    hierarchyKeyString = tokens[0];
+                    projectID = tokens[1];
+                }
+                else
+                {
+                    hierarchyKeyString = KeyAndProjectString;
+                }
 
-            TestSuiteSelectionTreeViewModel testSuiteSelectionTreeViewModel = new TestSuiteSelectionTreeViewModel(DataProviderFactory, hierarchyRootKey);
-            DataContext = testSuiteSelectionTreeViewModel;
+                Key hierarchyRootKey = new Key();
+                hierarchyRootKey.InitailizeFromKeyString(hierarchyKeyString);
+
+                TestSuiteSelectionTreeViewModel testSuiteSelectionTreeViewModel = new TestSuiteSelectionTreeViewModel(DataProviderFactory, hierarchyRootKey, projectID);
+                DataContext = testSuiteSelectionTreeViewModel;
+            }
+            
         }
+
         public void OnCancelButtonClick()
         {
             NavigationManager.NavigateTo("/");
         }
+
         public void OnOkButtonClick()
         {
             DataContext.CreateTestSuiteCommand.Execute(null);
             if(DataContext.TestSuiteHierarchyKey != null)
             {
-                NavigationManager.NavigateTo("/pluginPage/36AB7319-01C7-4F3F-9594-A89DBA0BC0A1/" + DataContext.TestSuiteHierarchyKey.ToString());
+                NavigationManager.NavigateTo("/pluginPage/36AB7319-01C7-4F3F-9594-A89DBA0BC0A1/" + DataContext.TestSuiteHierarchyKey.ToString() + "/" + DataContext.ProjectID);
             }
         }
-
 
         private ResourceViewModel? NewTestSuiteViewModel { get; set; }
 
