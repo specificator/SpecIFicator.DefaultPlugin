@@ -61,6 +61,24 @@ namespace SpecIFicator.DefaultPlugin.Resources.BlazorComponents {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Error ähnelt.
+        /// </summary>
+        internal static string Error_DialogTitle {
+            get {
+                return ResourceManager.GetString("Error.DialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Editor type not found.  ähnelt.
+        /// </summary>
+        internal static string Error_EditorTypeNotFound {
+            get {
+                return ResourceManager.GetString("Error.EditorTypeNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Add statement ähnelt.
         /// </summary>
         internal static string Label_AddStatement {

@@ -105,5 +105,11 @@ namespace SpecIFicator.DefaultPlugin.BlazorComponents
             DataContext.ShowComments = false;
             StateHasChanged();
         }
+
+        private async Task OnErrorDialogClose(bool accepted)
+        {
+            DataContext.EditorActive = false;
+            StateHasChanged();
+        }
     }
 }

@@ -109,12 +109,27 @@
 </div>
 @if (DataContext.EditorActive)
 {
-    Type itemType = DynamicConfigurationManager.GetComponentType("ResourceEditor",
-                                                                 GetType().FullName,
-                                                                 ((NodeViewModel)DataContext.SelectedNode).RootResourceClassKey);
-    <CascadingValue Value="@DataContext">
-        <DynamicComponent Type="itemType"></DynamicComponent>
-    </CascadingValue>
+    if (DataContext.SelectedNode != null)
+    {
+        Type? itemType = DynamicConfigurationManager.GetComponentType("ResourceEditor",
+                                                                     GetType().FullName,
+                                                                     ((NodeViewModel)DataContext.SelectedNode).RootResourceClassKey);
+        if (itemType != null)
+        {
+            <CascadingValue Value="@DataContext">
+                <DynamicComponent Type="itemType"></DynamicComponent>
+            </CascadingValue>
+        }
+        else
+        {
+            @* Show error message *@
+            <ModalDialog Title="@L["Error.DialogTitle"]"
+                         DialogType="ModalDialog.ModalDialogType.Ok"
+                         OnClose="@OnErrorDialogClose">
+                <div>@L["Error.EditorTypeNotFound"]</div>
+            </ModalDialog>
+        }
+    }
 }
 @if (DataContext.ShowDeleteConfirm)
 {
