@@ -188,16 +188,6 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>ResourceSearch.resx</DependentUpon>
       </Compile>
-      <Compile Update="Resources\BlazorComponents\ResourceView.de.Designer.cs">
-        <DependentUpon>ResourceView.de.resx</DependentUpon>
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-      </Compile>
-      <Compile Update="Resources\BlazorComponents\ResourceView.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>ResourceView.resx</DependentUpon>
-      </Compile>
       <Compile Update="Resources\BlazorComponents\Revision\ResourceRevisionView.de.Designer.cs">
         <DependentUpon>ResourceRevisionView.de.resx</DependentUpon>
         <DesignTime>True</DesignTime>
@@ -393,14 +383,6 @@
       <EmbeddedResource Update="Resources\BlazorComponents\ResourceSearch.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>ResourceSearch.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\BlazorComponents\ResourceView.de.resx">
-        <LastGenOutput>ResourceView.de.Designer.cs</LastGenOutput>
-        <Generator>ResXFileCodeGenerator</Generator>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\BlazorComponents\ResourceView.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>ResourceView.Designer.cs</LastGenOutput>
       </EmbeddedResource>
       <EmbeddedResource Update="Resources\BlazorComponents\Revision\ResourceRevisionView.de.resx">
         <LastGenOutput>ResourceRevisionView.de.Designer.cs</LastGenOutput>
